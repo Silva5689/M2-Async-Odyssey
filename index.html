@@ -1,13 +1,45 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>m2-async-odysseyr</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ofertas de Videojuegos</title>
+
+    <link rel="stylesheet" href="/src/style.css">
+    <script type="module" src="/src/main.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Ofertas de Videojuegos</h1>
+        <p>Encuentra las mejores ofertas de videojuegos para PC.</p>
+    </header>
+
+    <main>
+        <section id="ofertas">
+          <h2>Ofertas disponibles</h2>
+
+          <div class="controles">
+              <label for="busqueda">Buscar videojuego:</label>
+              <input
+                  type="search"
+                  id="busqueda"
+                  placeholder="Ej. Frosthaven"
+              >
+              <label for="orden">Ordenar por:</label>
+
+              <select id="orden">
+                  <option value="original">Orden original</option>
+                  <option value="precio-asc">Precio: menor a mayor</option>
+                  <option value="precio-desc">Precio: mayor a menor</option>
+                  <option value="descuento-desc">Mayor descuento</option>
+              </select>
+          </div>
+
+          <p id="estado">Esperando las ofertas...</p>
+          <p id="ahorro-total">Ahorro potencial: 0.00 $</p>
+          <div id="lista-ofertas"></div>
+      </section>
+    </main>
+</body>
 </html>
