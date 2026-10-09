@@ -3,7 +3,7 @@
 # Buscador de ofertas de videojuegos
 He decidido hacer un buscador de ofertas de videojuegos utilizando la API pública CheapShark.
 
-## DescripciónSe 
+## Descripción 
 Se trata de una web en la que podemos ver diferentes videojuegos en oferta. Usamos una api para conseguir los videojuegos con sus ofertas y usarlos en la página.
 ## Lenguajes utilizados
 - HTML
