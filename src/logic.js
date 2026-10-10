@@ -9,12 +9,30 @@ export function filtrarOfertas(ofertas, busqueda) {
 
 export function prepararOfertas(ofertas) {
 
-    return ofertas.map(oferta => ({
-        ...oferta,
-        salePrice: Number(oferta.salePrice),
-        normalPrice: Number(oferta.normalPrice),
-        savings: Number(oferta.savings)
-    }));
+    if (!Array.isArray(ofertas)) {
+        throw new Error("La API no ha devuelto un array de ofertas.");
+    }
+
+    return ofertas
+        .filter(oferta =>
+            oferta !== null &&
+            typeof oferta === "object" &&
+            typeof oferta.title === "string" &&
+            oferta.title.trim() !== ""
+        )
+        .map(oferta => ({
+            ...oferta,
+            salePrice: Number(oferta.salePrice),
+            normalPrice: Number(oferta.normalPrice),
+            savings: Number(oferta.savings)
+        }))
+        .filter(oferta =>
+            Number.isFinite(oferta.salePrice) &&
+            Number.isFinite(oferta.normalPrice) &&
+            Number.isFinite(oferta.savings) &&
+            oferta.salePrice >= 0 &&
+            oferta.normalPrice >= oferta.salePrice
+        );
 }
 
 export function calcularAhorroTotal(ofertas) {
