@@ -1,6 +1,4 @@
-export function mostrarOfertas(ofertas) {
-
-    const contenedor = document.querySelector("#lista-ofertas");
+export function mostrarOfertas(contenedor, ofertas) {
 
     contenedor.textContent = "";
 
@@ -13,6 +11,10 @@ export function mostrarOfertas(ofertas) {
         imagen.className = "tarjeta-imagen";
         imagen.src = oferta.thumb;
         imagen.alt = oferta.title;
+        imagen.addEventListener("error", () => {
+            imagen.removeAttribute("src");
+            imagen.alt = "Imagen no disponible";
+        });
 
         const titulo = document.createElement("h3");
         titulo.className = "tarjeta-titulo";
@@ -30,12 +32,30 @@ export function mostrarOfertas(ofertas) {
         descuento.className = "descuento";
         descuento.textContent = `Descuento: ${oferta.savings.toFixed(0)} %`;
 
+        const enlace = document.createElement("a");
+        enlace.className = "enlace-oferta";
+        enlace.href = `https://www.cheapshark.com/redirect?dealID=${oferta.dealID}`;
+        enlace.target = "_blank";
+        enlace.rel = "noopener noreferrer";
+        enlace.textContent = "Ver oferta";
+
         tarjeta.appendChild(imagen);
         tarjeta.appendChild(titulo);
         tarjeta.appendChild(precio);
         tarjeta.appendChild(precioOriginal);
         tarjeta.appendChild(descuento);
+        tarjeta.appendChild(enlace);
 
         contenedor.append(tarjeta);
     }
+}
+
+export function mostrarAhorro(elemento, total) {
+
+    elemento.textContent = `Ahorro potencial: ${total.toFixed(2)} $`;
+}
+
+export function mostrarEstado(elemento, mensaje) {
+
+    elemento.textContent = mensaje;
 }

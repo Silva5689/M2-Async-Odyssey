@@ -10,6 +10,12 @@
     <script type="module" src="/src/main.js" defer></script>
 </head>
 <body>
+  <noscript>
+      <p class="aviso-sin-js">
+          Esta página necesita JavaScript activado para consultar
+          las ofertas de videojuegos.
+      </p>
+  </noscript>
     <header>
         <h1>Ofertas de Videojuegos</h1>
         <p>Encuentra las mejores ofertas de videojuegos para PC.</p>
@@ -37,6 +43,11 @@
           </div>
 
           <p id="estado">Esperando las ofertas...</p>
+
+          <button id="reintentar" type="button" hidden>
+              Reintentar
+          </button>
+
           <p id="ahorro-total">Ahorro potencial: 0.00 $</p>
           <div id="lista-ofertas"></div>
       </section>

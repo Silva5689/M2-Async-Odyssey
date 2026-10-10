@@ -37,9 +37,11 @@ export function prepararOfertas(ofertas) {
 
 export function calcularAhorroTotal(ofertas) {
 
-    return ofertas.reduce((total, oferta) => {
-        return total + (oferta.normalPrice - oferta.salePrice);
+    const total = ofertas.reduce((acumulado, oferta) => {
+        return acumulado + (oferta.normalPrice - oferta.salePrice);
     }, 0);
+
+    return Math.round(total * 100) / 100;
 }
 
 export function ordenarOfertas(ofertas, criterio) {
