@@ -27,7 +27,12 @@ export async function obtenerOfertas() {
     );
 
     if (!respuesta.ok) {
-        throw new Error(`Error HTTP: ${respuesta.status}`);
+
+        const error = new Error("Error al consultar CheapShark");
+
+        error.status = respuesta.status;
+
+        throw error;
     }
 
     const ofertas = await respuesta.json();

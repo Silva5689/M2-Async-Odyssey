@@ -7,6 +7,23 @@ export function filtrarOfertas(ofertas, busqueda) {
     );
 }
 
+export function filtrarPorPrecio(ofertas, precioMaximo) {
+
+    if (precioMaximo === "") {
+        return ofertas;
+    }
+
+    const limite = Number(precioMaximo);
+
+    if (!Number.isFinite(limite) || limite < 0) {
+        return ofertas;
+    }
+
+    return ofertas.filter(oferta =>
+        oferta.salePrice <= limite
+    );
+}
+
 export function prepararOfertas(ofertas) {
 
     if (!Array.isArray(ofertas)) {

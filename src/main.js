@@ -8,6 +8,7 @@ import {
 
 import {
     filtrarOfertas,
+    filtrarPorPrecio,
     prepararOfertas,
     calcularAhorroTotal,
     ordenarOfertas
@@ -19,8 +20,10 @@ const ahorroTotal = document.querySelector("#ahorro-total");
 const orden = document.querySelector("#orden");
 const contenedor = document.querySelector("#lista-ofertas");
 const botonReintentar = document.querySelector("#reintentar");
+const precioMaximo = document.querySelector("#precio-maximo");
 
 let ofertasCargadas = null;
+let cargando = false;
 
 function actualizar() {
 
@@ -32,9 +35,15 @@ function actualizar() {
 busqueda.addEventListener("input", actualizar);
 orden.addEventListener("change", actualizar);
 botonReintentar.addEventListener("click", cargarOfertas);
+precioMaximo.addEventListener("input", actualizar);
 
 async function cargarOfertas() {
 
+    if (cargando) {
+        return;
+    }
+
+    cargando = true;
     ofertasCargadas = null;
     botonReintentar.hidden = true;
     mostrarEstado(estado, "Cargando ofertas...");
@@ -62,8 +71,8 @@ async function cargarOfertas() {
 
         let mensaje = "No se han podido cargar las ofertas.";
 
-        if (error.message.startsWith("Error HTTP:")) {
-            mensaje = "CheapShark ha respondido con un error del servidor.";
+        if (typeof error.status === "number") {
+            mensaje = `CheapShark ha respondido con un error HTTP (${error.status}).`;
         } else if (error instanceof TypeError) {
             mensaje = "No se ha podido conectar con CheapShark.";
         }
@@ -71,6 +80,8 @@ async function cargarOfertas() {
         mostrarEstado(estado, mensaje);
 
         botonReintentar.hidden = false;
+    } finally {
+        cargando = false;
     }
 }
 
@@ -85,7 +96,9 @@ function actualizarResultados(ofertas) {
 
     const filtradas = filtrarOfertas(ofertas, busqueda.value);
 
-    const ordenadas = ordenarOfertas(filtradas, orden.value);
+    const porPrecio = filtrarPorPrecio(filtradas, precioMaximo.value);
+
+    const ordenadas = ordenarOfertas(porPrecio, orden.value);
 
     mostrarOfertas(contenedor, ordenadas);
 

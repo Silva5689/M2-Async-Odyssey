@@ -96,14 +96,15 @@ main {
 }
 
 
-/* BUSCADOR Y ORDENACIÓN */
+/* BUSCADOR, ORDENACIÓN Y PRECIO MÁXIMO */
 
 .controles {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns: 2fr 1fr 1fr;
     grid-template-areas:
-        "label-busqueda label-orden"
-        "busqueda orden";
+        "label-busqueda label-orden label-precio"
+        "busqueda orden precio";
 
     gap: 12px 20px;
 
@@ -125,12 +126,20 @@ label[for="orden"] {
     grid-area: label-orden;
 }
 
+label[for="precio-maximo"] {
+    grid-area: label-precio;
+}
+
 #busqueda {
     grid-area: busqueda;
 }
 
 #orden {
     grid-area: orden;
+}
+
+#precio-maximo {
+    grid-area: precio;
 }
 
 .controles label {
@@ -195,6 +204,38 @@ label[for="orden"] {
 }
 
 
+/* BOTÓN DE REINTENTO */
+
+#reintentar {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+
+    color: #080d19;
+    background-color: var(--turquesa);
+
+    border: none;
+    border-radius: 10px;
+
+    font: inherit;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#reintentar:hover {
+    background-color: #2dd4bf;
+}
+
+#reintentar:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+#reintentar[hidden] {
+    display: none;
+}
+
 
 /* CUADRÍCULA DE OFERTAS */
 
@@ -236,7 +277,6 @@ label[for="orden"] {
 
 .tarjeta-oferta:hover {
     transform: translateY(-6px);
-
     border-color: var(--violeta);
 
     box-shadow:
@@ -320,6 +360,7 @@ label[for="orden"] {
     font-size: 0.85rem;
 }
 
+
 /* ENLACE A LA OFERTA */
 
 .enlace-oferta {
@@ -347,53 +388,6 @@ label[for="orden"] {
 }
 
 
-/* ACCESIBILIDAD */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .tarjeta-oferta,
-    .controles input,
-    .controles select {
-        transition: none;
-    }
-
-    .tarjeta-oferta:hover {
-        transform: none;
-    }
-}
-
-/* BOTÓN DE REINTENTO */
-
-#reintentar {
-    padding: 12px 20px;
-    margin-bottom: 20px;
-
-    color: #080d19;
-    background-color: var(--turquesa);
-
-    border: none;
-    border-radius: 10px;
-
-    font: inherit;
-    font-weight: 700;
-
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-#reintentar:hover {
-    background-color: #2dd4bf;
-}
-
-#reintentar:focus-visible {
-    outline: 2px solid white;
-    outline-offset: 3px;
-}
-
-#reintentar[hidden] {
-    display: none;
-}
-
 /* AVISO SIN JAVASCRIPT */
 
 .aviso-sin-js {
@@ -405,4 +399,50 @@ label[for="orden"] {
 
     text-align: center;
     font-weight: 700;
+}
+
+
+/* ADAPTACIÓN A MÓVILES */
+
+@media (max-width: 650px) {
+
+    header {
+        padding: 55px 20px;
+    }
+
+    main {
+        padding: 30px 15px;
+    }
+
+    .controles {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "label-busqueda"
+            "busqueda"
+            "label-orden"
+            "orden"
+            "label-precio"
+            "precio";
+    }
+
+    #lista-ofertas {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ACCESIBILIDAD */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .tarjeta-oferta,
+    .controles input,
+    .controles select,
+    #reintentar {
+        transition: none;
+    }
+
+    .tarjeta-oferta:hover {
+        transform: none;
+    }
 }
