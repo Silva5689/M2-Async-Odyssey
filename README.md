@@ -38,6 +38,8 @@ Inicialmente, ChatGPT utilizó innerHTML para mostrar los títulos de los videoj
 ### Decisión 3:
 Una alternativa que planteó ChatGPT para calcular el ahorro total era utilizar map() para obtener el ahorro de cada videojuego y después sumar todos los resultados. No embobstante, preferí utilizar directamente reduce(), ya que permite recorrer el array e ir acumulando el ahorro en un único valor. De esta manera no hace falta crear un array intermedio y el código queda más sencillo.
 
+### Decisión 4:
+En la evaluación del proyecto, la IA propuso utilizar map() y replaceChildren() para crear y mostrar las tarjetas de los videojuegos en lugar de for...of y appendChild(). Sin embargo, decidí mantener el bucle for...of porque en este caso no necesito transformar un array en otro, sino recorrer los videojuegos y añadir sus elementos al DOM. Además, es una solución que entiendo mejor y considero suficiente para este proyecto.
 
 
 
