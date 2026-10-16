@@ -32,6 +32,11 @@ Después cambiamos el código para usar las clases específicas como .precio-act
 ### Decisión 1:
 Para el buscador uso filter() sobre los videojuegos que ya hemos descargado. Gracias a esto no hay que hacer una nueva petición a la API cada vez que se escribe una letra.
 
+### Decisión 2:
+Inicialmente, ChatGPT utilizó innerHTML para mostrar los títulos de los videojuegos, pero decidí cambiarlo por textContent. El motivo es que innerHTML interpreta el contenido como código HTML, lo que podría provocar ataques XSS si los datos recibidos de la API contienen código malicioso. En cambio, textContent muestra el contenido como texto plano, sin interpretarlo como HTML. Como únicamente necesitamos mostrar los nombres de los videojuegos, considero que es una opción más segura.
+
+### Decisión 3:
+Una alternativa que planteó ChatGPT para calcular el ahorro total era utilizar map() para obtener el ahorro de cada videojuego y después sumar todos los resultados. No embobstante, preferí utilizar directamente reduce(), ya que permite recorrer el array e ir acumulando el ahorro en un único valor. De esta manera no hace falta crear un array intermedio y el código queda más sencillo.
 
 
 
